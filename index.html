@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="theme-color" content="#090d16">
-    <title>RAY 麻將個人戰績分析系統</title>
+    <title>RAY 麻將個人戰績分析系統 Pro</title>
     <style>
         html, body {
             margin: 0 !important;
@@ -42,7 +42,7 @@
             <div class="w-full max-w-4xl mx-auto flex justify-between items-center">
                 <div class="flex items-center space-x-2">
                     <span class="text-xl sm:text-2xl font-black italic tracking-wider text-smlGreen">RAY</span>
-                    <span class="text-[10px] sm:text-xs bg-gray-800 text-smlCyan px-2 py-0.5 rounded border border-smlCyan/30 whitespace-nowrap">麻將戰績簿</span>
+                    <span class="text-[10px] sm:text-xs bg-gray-800 text-smlCyan px-2 py-0.5 rounded border border-smlCyan/30 whitespace-nowrap">麻將戰績簿 Pro</span>
                 </div>
                 <button type="button" id="btnClearAll" class="px-2.5 py-1.5 text-xs bg-red-950 text-red-400 font-bold rounded-lg border border-red-800/80 transition flex items-center space-x-1 cursor-pointer">
                     <i class="fa-solid fa-triangle-exclamation text-xs"></i>
@@ -62,6 +62,7 @@
                 </button>
             </div>
         </nav>
+        
         <div class="w-full max-w-4xl mx-auto px-2 sm:px-4 mt-3">
             <!-- 分頁 1：數據分析 -->
             <div id="tab-analysis" class="tab-content space-y-4">
@@ -91,6 +92,7 @@
                             </div>
                         </div>
                     </div>
+                    
                     <div class="space-y-3">
                         <div>
                             <div class="text-[11px] text-smlGreen font-bold mb-1">大局表現 CORE STATS</div>
@@ -98,9 +100,11 @@
                                 <div><div class="text-[9px] text-gray-400 whitespace-nowrap">總雀數</div><div id="statTotalGames" class="text-xs sm:text-sm font-bold text-white">0</div></div>
                                 <div><div class="text-[9px] text-gray-400 whitespace-nowrap">平均順位</div><div id="statAvgRank" class="text-xs sm:text-sm font-bold text-smlGreen">0.00</div></div>
                                 <div><div class="text-[9px] text-gray-400 whitespace-nowrap">最長連莊</div><div id="statMaxStreak" class="text-xs sm:text-sm font-bold text-white">0</div></div>
-                                <div><div class="text-[9px] text-gray-400 whitespace-nowrap">平均連莊</div><div id="statAvgStreak" class="text-xs sm:text-sm font-bold text-white">0.00</div></div>
+                                <div><div class="text-[9px] text-gray-400 whitespace-nowrap">運氣值</div><div id="statLuckValue" class="text-xs sm:text-sm font-bold text-smlCyan">100</div></div>
                             </div>
+                            <div class="text-[9px] text-gray-500 mt-1 pl-1">※ 運氣值：基於自摸(+15)與被自摸(-15)為主，胡牌(+5)與放槍(-5)為輔計算之綜合氣運權重（基準 100）。</div>
                         </div>
+                        
                         <div>
                             <div class="text-[11px] text-smlGreen font-bold mb-1">生涯對局計數 CAREER TOTALS</div>
                             <div class="grid grid-cols-4 gap-1 text-center bg-gray-900/60 p-2 rounded-xl border border-gray-800">
@@ -110,6 +114,7 @@
                                 <div><div class="text-[9px] text-gray-400 whitespace-nowrap">生涯放槍</div><div id="statCareerGun" class="text-xs sm:text-sm font-bold text-smlRed">0</div></div>
                             </div>
                         </div>
+                        
                         <div>
                             <div class="text-[11px] text-smlGreen font-bold mb-1">攻擊打點 OFFENSE</div>
                             <div class="grid grid-cols-4 gap-1 text-center bg-gray-900/60 p-2 rounded-xl border border-gray-800">
@@ -118,7 +123,9 @@
                                 <div><div class="text-[9px] text-gray-400 whitespace-nowrap">得分次數</div><div id="statWinCount" class="text-xs sm:text-sm font-bold text-smlGreen">0</div></div>
                                 <div><div class="text-[9px] text-gray-400 whitespace-nowrap">得分頻率</div><div id="statWinFreq" class="text-xs sm:text-sm font-bold text-white">0.0</div></div>
                             </div>
+                            <div class="text-[9px] text-gray-500 mt-1 pl-1">※ 得分頻率標準：平均每開局幾把手牌可得分一次（總手數 / 總胡摸次數）。數值越低代表胡牌越頻繁。</div>
                         </div>
+                        
                         <div>
                             <div class="text-[11px] text-smlRed font-bold mb-1">防守失血 DEFENSE (含被自摸)</div>
                             <div class="grid grid-cols-3 gap-1 text-center bg-gray-900/60 p-2 rounded-xl border border-gray-800">
@@ -126,7 +133,9 @@
                                 <div><div class="text-[9px] text-gray-400 whitespace-nowrap">失分頻率</div><div id="statLossFreq" class="text-xs sm:text-sm font-bold text-white">0.0</div></div>
                                 <div><div class="text-[9px] text-gray-400 whitespace-nowrap">失分總次數</div><div id="statLossCount" class="text-xs sm:text-sm font-bold text-white">0</div></div>
                             </div>
+                            <div class="text-[9px] text-gray-500 mt-1 pl-1">※ 失分頻率標準：平均每開局幾把手牌會失血一次（總手數 / (放槍+被自摸次數)）。數值越高代表守備越嚴密。</div>
                         </div>
+                        
                         <div class="grid grid-cols-4 gap-1 text-center">
                             <div class="bg-gray-900/90 p-2 rounded-xl border border-gray-800">
                                 <div class="text-[9px] text-gray-400 whitespace-nowrap">胡牌率</div>
@@ -146,7 +155,7 @@
                             </div>
                         </div>
                     </div>
-                    <!-- 六邊形圖與按鈕 -->
+                    
                     <div class="pt-2">
                         <div class="flex justify-between items-center mb-1 px-1">
                             <span class="text-[11px] font-bold text-smlGreen">六維能力雷達圖</span>
@@ -160,6 +169,7 @@
                         </div>
                     </div>
                 </section>
+                
                 <section class="space-y-4">
                     <div class="bg-smlCard p-3.5 rounded-2xl sml-border">
                         <h3 class="text-xs font-bold text-white mb-2 flex items-center">
@@ -175,6 +185,7 @@
                     </div>
                 </section>
             </div>
+
             <!-- 分頁 2：戰績錄入 -->
             <div id="tab-input" class="tab-content hidden space-y-4">
                 <div class="bg-gradient-to-b from-gray-900 to-smlCard sml-border rounded-2xl p-3.5 space-y-3">
@@ -191,16 +202,30 @@
                             </button>
                         </div>
                     </div>
+                    
                     <div class="flex items-center justify-between bg-gray-900/90 p-2 rounded-xl border border-gray-800 text-xs">
                         <div class="flex items-center space-x-2">
                             <label class="text-gray-300 font-bold text-[11px]">身份：</label>
                             <button type="button" id="btnDealerToggle" onclick="window.toggleDealerStatus()" class="px-3 py-1 rounded-lg font-bold border bg-gray-800 text-gray-400 border-gray-700">閒家</button>
                         </div>
                         <div class="flex items-center space-x-1">
-                            <span class="text-gray-400 text-[11px]">狀態：</span>
+                            <span class="text-gray-400 text-[11px]">莊家狀態：</span>
                             <span id="liveDealerStatusText" class="text-smlGreen font-bold text-xs">閒家</span>
                         </div>
                     </div>
+
+                    <div id="otherDealerSection" class="bg-gray-900/60 p-2 rounded-xl border border-gray-800 flex items-center justify-between text-xs">
+                        <span class="text-gray-300 font-bold text-[11px]">其他人連莊台數：</span>
+                        <select id="otherDealerStreakSelect" class="bg-gray-900 border border-gray-700 rounded-lg p-1 text-xs text-smlAmber font-bold outline-none">
+                            <option value="0">無連莊 (0台)</option>
+                            <option value="1">莊連一 (3台)</option>
+                            <option value="2">莊連二 (5台)</option>
+                            <option value="3">莊連三 (7台)</option>
+                            <option value="4">莊連四 (9台)</option>
+                            <option value="5">莊連五 (11台)</option>
+                        </select>
+                    </div>
+                    
                     <div class="grid grid-cols-2 gap-2 bg-gray-950/60 p-2 rounded-xl border border-gray-800/80">
                         <div>
                             <label class="block text-[10px] text-gray-400 mb-0.5">底 / 台 (點數)</label>
@@ -217,10 +242,14 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="space-y-2">
                         <div>
-                            <label class="block text-[10px] text-gray-400 mb-0.5">該把台數 (可填 0)</label>
-                            <input type="number" id="liveTaiInput" placeholder="0" min="0" value="0" class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2 text-xs text-white outline-none focus:border-smlCyan font-bold">
+                            <div class="flex justify-between items-center mb-0.5">
+                                <label class="block text-[10px] text-gray-400">該把台數 (點擊牌型自動計算)</label>
+                                <span id="autoTaiBadge" class="text-[10px] text-smlGreen font-bold font-mono">0 台</span>
+                            </div>
+                            <input type="number" id="liveTaiInput" placeholder="0" min="0" value="0" readonly class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2 text-xs text-smlGreen font-black outline-none font-mono text-center">
                         </div>
                         <div class="grid grid-cols-2 gap-2">
                             <div>
@@ -233,26 +262,33 @@
                             </div>
                         </div>
                     </div>
+
                     <div>
-                        <label class="block text-[10px] text-gray-400 mb-1">牌型選擇 (複選)</label>
-                        <div id="patternsContainer" class="flex flex-wrap gap-1 max-h-24 overflow-y-auto p-1.5 bg-gray-950 rounded-xl border border-gray-800"></div>
+                        <label class="block text-[10px] text-gray-400 mb-1">牌型選擇 (分類歸納 / 按下自動疊加台數)</label>
+                        <div id="patternsContainer" class="space-y-2 max-h-48 overflow-y-auto p-2 bg-gray-950 rounded-xl border border-gray-800"></div>
                     </div>
+
                     <div class="grid grid-cols-2 gap-2 pt-1">
                         <button type="button" onclick="window.addLiveHand('zimo')" class="py-2.5 bg-emerald-950 active:bg-emerald-800 text-smlGreen border border-smlGreen/50 font-black rounded-xl text-xs shadow">+ 自摸</button>
                         <button type="button" onclick="window.addLiveHand('hu')" class="py-2.5 bg-cyan-950 active:bg-cyan-800 text-smlCyan border border-smlCyan/50 font-black rounded-xl text-xs shadow">+ 胡牌</button>
                         <button type="button" onclick="window.addLiveHand('beZimo')" class="py-2.5 bg-amber-950 active:bg-amber-800 text-smlAmber border border-smlAmber/50 font-black rounded-xl text-xs shadow">- 被自摸</button>
                         <button type="button" onclick="window.addLiveHand('gun')" class="py-2.5 bg-red-950 active:bg-red-800 text-smlRed border border-smlRed/50 font-black rounded-xl text-xs shadow">- 放槍</button>
                     </div>
-                    <div class="pt-0.5">
-                        <button type="button" onclick="window.addLiveHand('pass')" class="w-full py-2 bg-gray-800 active:bg-gray-700 text-gray-300 border border-gray-700 font-bold rounded-xl text-xs shadow">流局 / 過手</button>
+
+                    <div class="grid grid-cols-2 gap-2 pt-0.5">
+                        <button type="button" onclick="window.addLiveHand('draw')" class="py-2 bg-gray-800 active:bg-gray-700 text-smlCyan border border-smlCyan/30 font-bold rounded-xl text-xs shadow">流局 (莊連加一)</button>
+                        <button type="button" onclick="window.addLiveHand('pass')" class="py-2 bg-gray-800 active:bg-gray-700 text-gray-400 border border-gray-700 font-bold rounded-xl text-xs shadow">不干我的事 / 過手</button>
                     </div>
+
                     <div class="bg-gray-950/90 p-2 rounded-xl text-[11px] text-center border border-gray-800" id="liveSummary">
                         手數: <span class="text-white font-bold">0</span> | 點數: <span class="text-smlCyan font-bold">0P</span> | 金額: <span class="text-smlGreen font-bold">$0</span>
                     </div>
+
                     <div id="liveHandsList" class="space-y-1.5 max-h-40 overflow-y-auto pr-1">
                         <div class="text-center text-gray-500 py-2 text-xs">尚未開始紀錄</div>
                     </div>
                 </div>
+
                 <div class="bg-smlCard sml-border rounded-2xl p-4 space-y-3">
                     <div class="border-b border-gray-800 pb-2 flex justify-between items-center">
                         <h3 class="text-xs sm:text-sm font-bold text-smlGreen flex items-center">
@@ -349,6 +385,7 @@
                     </form>
                 </div>
             </div>
+
             <!-- 分頁 3：歷史紀錄 -->
             <div id="tab-history" class="tab-content hidden">
                 <section class="bg-smlCard p-3 sm:p-4 rounded-2xl sml-border space-y-3">
@@ -378,7 +415,8 @@
             </div>
         </div>
     </div>
-    <!-- 評分標準 Modal -->
+
+    <!-- 雷達圖評分標準 Modal -->
     <div id="radarInfoModal" class="fixed inset-0 bg-black/80 flex items-center justify-center p-3 z-50 hidden">
         <div class="bg-smlCard border border-gray-700 rounded-2xl max-w-md w-full p-4 space-y-3 text-xs">
             <div class="flex justify-between items-center border-b border-gray-800 pb-2">
@@ -416,14 +454,57 @@
             <button onclick="window.closeRadarInfoModal()" class="w-full py-2 bg-gray-800 hover:bg-gray-700 text-gray-300 font-bold rounded-xl">了解</button>
         </div>
     </div>
-    <!-- 詳情 Modal -->
+
+    <!-- 詳情 Modal (對局歷史切換分頁) -->
     <div id="detailModal" class="fixed inset-0 bg-black/80 flex items-center justify-center p-3 z-50 hidden">
-        <div class="bg-smlCard border border-gray-700 rounded-2xl max-w-md w-full max-h-[85vh] flex flex-col overflow-hidden shadow-2xl">
+        <div class="bg-smlCard border border-gray-700 rounded-2xl max-w-md w-full max-h-[88vh] flex flex-col overflow-hidden shadow-2xl">
             <div class="p-3 border-b border-gray-800 flex justify-between items-center bg-gray-900">
                 <h3 id="modalTitle" class="text-xs sm:text-sm font-bold text-smlGreen truncate pr-2">對局詳細紀錄</h3>
                 <button onclick="window.closeModal()" class="text-gray-400 hover:text-white p-1"><i class="fa-solid fa-xmark text-lg"></i></button>
             </div>
-            <div class="p-3 overflow-y-auto space-y-3 text-xs" id="modalBody"></div>
+            
+            <!-- Modal 內部分頁標籤 -->
+            <div class="flex bg-gray-950 p-1 border-b border-gray-800 text-xs font-bold">
+                <button id="modalTabBtn-hands" onclick="window.switchModalTab('hands')" class="flex-1 py-1.5 rounded-lg text-center text-smlGreen bg-gray-800 border border-smlGreen/30">每一把戰績</button>
+                <button id="modalTabBtn-analysis" onclick="window.switchModalTab('analysis')" class="flex-1 py-1.5 rounded-lg text-center text-gray-400 border border-transparent">戰績分析與趨勢</button>
+            </div>
+
+            <div class="p-3 overflow-y-auto space-y-3 text-xs flex-grow" id="modalBody">
+                <div id="modalTabContent-hands" class="space-y-2"></div>
+                <div id="modalTabContent-analysis" class="space-y-3 hidden">
+                    <div class="bg-gray-900/80 p-2.5 rounded-xl border border-gray-800 space-y-2">
+                        <div class="text-[11px] font-bold text-smlCyan">本局對比數據 (下方小字灰色為生涯平均)</div>
+                        <div class="grid grid-cols-3 gap-2 text-center">
+                            <div class="bg-gray-950 p-1.5 rounded-lg border border-gray-800">
+                                <div class="text-[9px] text-gray-400">得分/失分數</div>
+                                <div id="mStatGameWinLoss" class="text-xs font-bold text-white">0 / 0</div>
+                                <div id="mStatCareerWinLoss" class="text-[9px] text-gray-500 font-mono">生涯: 0 / 0</div>
+                            </div>
+                            <div class="bg-gray-950 p-1.5 rounded-lg border border-gray-800">
+                                <div class="text-[9px] text-gray-400">平均打點</div>
+                                <div id="mStatGameAvgPts" class="text-xs font-bold text-smlGreen">0P</div>
+                                <div id="mStatCareerAvgPts" class="text-[9px] text-gray-500 font-mono">生涯: 0P</div>
+                            </div>
+                            <div class="bg-gray-950 p-1.5 rounded-lg border border-gray-800">
+                                <div class="text-[9px] text-gray-400">總雀點/金額</div>
+                                <div id="mStatGameScore" class="text-xs font-bold text-smlCyan">0P / $0</div>
+                                <div id="mStatCareerAvgScore" class="text-[9px] text-gray-500 font-mono">生涯均局: 0P</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-900 p-2.5 rounded-xl border border-gray-800">
+                        <div class="text-[11px] font-bold text-smlGreen mb-1">本局金額走勢</div>
+                        <div class="h-32"><canvas id="modalMoneyChart"></canvas></div>
+                    </div>
+                    
+                    <div class="bg-gray-900 p-2.5 rounded-xl border border-gray-800">
+                        <div class="text-[11px] font-bold text-smlCyan mb-1">本局點數走勢</div>
+                        <div class="h-32"><canvas id="modalPointsChart"></canvas></div>
+                    </div>
+                </div>
+            </div>
+
             <div class="p-3 border-t border-gray-800 flex justify-between items-center bg-gray-900 space-x-2">
                 <button id="modalEditBtn" type="button" onclick="window.openEditModal()" class="px-3 py-2 bg-smlCyan/20 text-smlCyan border border-smlCyan/40 rounded-xl text-xs font-bold transition flex items-center">
                     <i class="fa-solid fa-pen-to-square mr-1"></i>編輯戰績
@@ -435,6 +516,7 @@
             </div>
         </div>
     </div>
+
     <!-- 編輯 Modal -->
     <div id="editModal" class="fixed inset-0 bg-black/80 flex items-center justify-center p-3 z-50 hidden">
         <div class="bg-smlCard border border-gray-700 rounded-2xl max-w-md w-full max-h-[85vh] flex flex-col overflow-hidden shadow-2xl">
@@ -479,26 +561,48 @@
             </form>
         </div>
     </div>
+
     <footer class="bg-smlCard/90 border-t border-gray-800 py-3 text-center text-[11px] text-gray-500 mt-auto w-full">
         <div class="w-full max-w-4xl mx-auto px-4 flex justify-center items-center space-x-1">
             <span class="font-black italic text-smlGreen text-xs">RAY</span>
             <span>麻將戰績系統 &copy; 2026</span>
         </div>
     </footer>
+
     <script>
         const TILE_OPTIONS = {
             "萬子": ["一萬","二萬","三萬","四萬","五萬","六萬","七萬","八萬","九萬"],
             "餅子": ["一餅(大餅)","二餅","三餅","四餅","五餅","六餅","七餅","八餅","九餅"],
             "索子": ["一索(小鳥)","二索","三索","四索","五索","六索","七索","八索","九索"],
             "風牌": ["東","南","西","北"],
-            "三元牌": ["白","發","中"]
+            "三元牌": ["白","發","中"],
+            "花牌": ["春","夏","秋","冬","梅","蘭","竹","菊","一花","二花","三花","四花"]
         };
-        const PATTERN_OPTIONS = [
-            "字一色", "大四喜", "天胡", "MIGI", "清一色", "五暗刻", 
-            "大三元", "小四喜", "七搶一", "八仙過海", "四暗刻", "碰碰胡", 
-            "混一色", "小三元", "三暗刻", "全求人", "平胡", "海底撈月", 
-            "槓上自摸", "獨聽", "門前清自摸", "花槓", "搶槓", "詐胡"
+
+        const PATTERNS_CATEGORIES = [
+            { category: "極限大台 (24/16台)", patterns: [
+                { name: "天胡", tai: 24 }, { name: "大四喜", tai: 16 }, { name: "字一色", tai: 16 }
+            ]},
+            { category: "滿台/役滿等級 (8台)", patterns: [
+                { name: "MIGI", tai: 8 }, { name: "哩咕哩咕", tai: 8 }, { name: "清一色", tai: 8 },
+                { name: "五暗刻", tai: 8 }, { name: "大三元", tai: 8 }, { name: "小四喜", tai: 8 },
+                { name: "七搶一", tai: 8 }, { name: "八仙過海", tai: 8 }
+            ]},
+            { category: "中階牌型 (5~4台)", patterns: [
+                { name: "四暗刻", tai: 5 }, { name: "碰碰胡", tai: 4 }, { name: "混一色", tai: 4 }, { name: "小三元", tai: 4 }
+            ]},
+            { category: "常見牌型 (3~2台)", patterns: [
+                { name: "門前清自摸", tai: 3 }, { name: "三暗刻", tai: 2 }, { name: "全求人", tai: 2 },
+                { name: "平胡", tai: 2 }, { name: "骰規", tai: 2 }
+            ]},
+            { category: "基本台數 (1台)", patterns: [
+                { name: "自摸", tai: 1 }, { name: "莊家", tai: 1 }, { name: "海底撈月", tai: 1 },
+                { name: "槓上自摸", tai: 1 }, { name: "場風", tai: 1 }, { name: "正花", tai: 1 },
+                { name: "正字", tai: 1 }, { name: "三元牌", tai: 1 }, { name: "獨聽", tai: 1 },
+                { name: "門清", tai: 1 }, { name: "花槓", tai: 1 }, { name: "全紅", tai: 1 }
+            ]}
         ];
+
         let records = JSON.parse(localStorage.getItem('mahjong_records')) || [];
         let liveHands = []; 
         let selectedPatterns = [];
@@ -506,6 +610,7 @@
         let dealerWinCount = 0; 
         let currentModalRecordId = null;
         let radarChartInstance = null, moneyChartInstance = null, pointsChartInstance = null;
+        let modalMoneyChartInstance = null, modalPointsChartInstance = null;
 
         function saveLiveStateToStorage() {
             const state = {
@@ -634,40 +739,77 @@
         function initPatternButtons() {
             const container = document.getElementById('patternsContainer');
             container.innerHTML = '';
-            PATTERN_OPTIONS.forEach(p => {
-                const btn = document.createElement('button');
-                btn.type = 'button';
-                btn.className = 'pattern-chip px-2 py-0.5 text-[10px] rounded-lg border border-gray-700 bg-gray-900 text-gray-300 whitespace-nowrap';
-                btn.innerText = p;
-                btn.onclick = () => window.togglePattern(p, btn);
-                container.appendChild(btn);
+            PATTERNS_CATEGORIES.forEach(cat => {
+                const groupDiv = document.createElement('div');
+                groupDiv.className = "space-y-1";
+                const catTitle = document.createElement('div');
+                catTitle.className = "text-[9px] text-gray-400 font-bold border-b border-gray-800 pb-0.5";
+                catTitle.innerText = cat.category;
+                groupDiv.appendChild(catTitle);
+
+                const chipsDiv = document.createElement('div');
+                chipsDiv.className = "flex flex-wrap gap-1";
+                cat.patterns.forEach(p => {
+                    const btn = document.createElement('button');
+                    btn.type = 'button';
+                    btn.className = 'pattern-chip px-2 py-0.5 text-[10px] rounded-lg border border-gray-700 bg-gray-900 text-gray-300 whitespace-nowrap';
+                    btn.innerHTML = `${p.name} <span class="text-[9px] opacity-75">(${p.tai}台)</span>`;
+                    btn.onclick = () => window.togglePattern(p, btn);
+                    chipsDiv.appendChild(btn);
+                });
+                groupDiv.appendChild(chipsDiv);
+                container.appendChild(groupDiv);
             });
         }
 
-        window.togglePattern = function(p, btn) {
-            if (selectedPatterns.includes(p)) {
-                selectedPatterns = selectedPatterns.filter(item => item !== p);
+        window.togglePattern = function(patternObj, btn) {
+            const idx = selectedPatterns.findIndex(item => item.name === patternObj.name);
+            if (idx > -1) {
+                selectedPatterns.splice(idx, 1);
                 btn.classList.remove('active');
             } else {
-                selectedPatterns.push(p);
+                selectedPatterns.push(patternObj);
                 btn.classList.add('active');
             }
+            recalculateAutoTai();
         };
+
+        function recalculateAutoTai() {
+            let totalTai = selectedPatterns.reduce((sum, p) => sum + p.tai, 0);
+            
+            if (isDealer) {
+                const dealerStreakTai = 1 + 2 * Math.max(0, dealerWinCount - 1);
+                totalTai += dealerStreakTai;
+            } else {
+                const otherStreak = parseInt(document.getElementById('otherDealerStreakSelect')?.value || 0);
+                if (otherStreak > 0) {
+                    totalTai += (1 + 2 * (otherStreak - 1));
+                }
+            }
+
+            document.getElementById('liveTaiInput').value = totalTai;
+            document.getElementById('autoTaiBadge').innerText = `${totalTai} 台`;
+        }
 
         window.toggleDealerStatus = function() {
             isDealer = !isDealer;
             dealerWinCount = isDealer ? 1 : 0;
             const btn = document.getElementById('btnDealerToggle');
             const statusText = document.getElementById('liveDealerStatusText');
+            const otherDealerSec = document.getElementById('otherDealerSection');
+
             if (isDealer) {
                 btn.className = 'px-3 py-1 rounded-lg font-bold border bg-emerald-950 text-smlGreen border-smlGreen/50';
                 btn.innerText = '莊家';
                 statusText.innerText = '莊家';
+                if (otherDealerSec) otherDealerSec.classList.add('hidden');
             } else {
                 btn.className = 'px-3 py-1 rounded-lg font-bold border bg-gray-800 text-gray-400 border-gray-700';
                 btn.innerText = '閒家';
                 statusText.innerText = '閒家';
+                if (otherDealerSec) otherDealerSec.classList.remove('hidden');
             }
+            recalculateAutoTai();
             saveLiveStateToStorage();
         };
 
@@ -714,7 +856,7 @@
             const winTile = winSelect.value;
             const gunTile = gunSelect.value;
             
-            if (type !== 'pass') {
+            if (type !== 'pass' && type !== 'draw') {
                 if (isNaN(taiVal) || taiVal < 0) {
                     alert('請輸入有效的台數（可填 0 台）！');
                     return;
@@ -730,10 +872,7 @@
             }
             
             let handMoney = 0, handPts = 0;
-            if (type === 'zimo') {
-                handMoney = (liveBaseMoney + (taiVal * liveTaiMoney)) * 3;
-                handPts = (liveBasePts + (taiVal * liveTaiPts)) * 3;
-            } else if (type === 'hu') {
+            if (type === 'zimo' || type === 'hu') {
                 handMoney = liveBaseMoney + (taiVal * liveTaiMoney);
                 handPts = liveBasePts + (taiVal * liveTaiPts);
             } else if (type === 'gun' || type === 'beZimo') {
@@ -744,20 +883,28 @@
             let dealerTitle = '', streakCountForStat = 0;
             
             if (isDealer) {
-                if (type === 'zimo' || type === 'hu' || type === 'pass') {
+                if (type === 'zimo' || type === 'hu' || type === 'draw') {
                     dealerWinCount++;
                     dealerTitle = dealerWinCount === 1 ? '莊家' : `莊連${dealerWinCount - 1}`;
                     streakCountForStat = dealerWinCount > 1 ? dealerWinCount - 1 : 0;
-                } else {
+                } else if (type === 'gun' || type === 'beZimo') {
+                    isDealer = false;
                     dealerWinCount = 0;
+                    const btn = document.getElementById('btnDealerToggle');
+                    if (btn) {
+                        btn.className = 'px-3 py-1 rounded-lg font-bold border bg-gray-800 text-gray-400 border-gray-700';
+                        btn.innerText = '閒家';
+                    }
                 }
-            } else if (!isDealer && (type === 'zimo' || type === 'hu')) {
-                dealerWinCount = 0;
             }
             
+            const statusText = document.getElementById('liveDealerStatusText');
             if (isDealer) {
-                document.getElementById('liveDealerStatusText').innerText = dealerWinCount <= 1 ? '莊家' : `莊連${dealerWinCount - 1}`;
+                statusText.innerText = dealerWinCount <= 1 ? '莊家' : `莊連${dealerWinCount - 1}`;
+            } else {
+                statusText.innerText = '閒家';
             }
+
             liveHands.push({
                 id: Date.now(),
                 type,
@@ -766,17 +913,17 @@
                 pts: handPts,
                 winTile: (type === 'zimo' || type === 'hu') ? winTile : '',
                 gunTile: type === 'gun' ? gunTile : '',
-                patterns: [...selectedPatterns],
+                patterns: selectedPatterns.map(p => p.name),
                 isDealer: isDealer,
                 dealerTitle: dealerTitle,
                 dealerStreakCount: streakCountForStat
             });
             
-            taiInput.value = '0';
-            winSelect.value = '';
-            gunSelect.value = '';
             selectedPatterns = [];
             document.querySelectorAll('.pattern-chip').forEach(btn => btn.classList.remove('active'));
+            winSelect.value = '';
+            gunSelect.value = '';
+            recalculateAutoTai();
             saveLiveStateToStorage();
             updateLiveHandUI();
         };
@@ -785,9 +932,6 @@
             if (liveHands.length === 0) return;
             const removed = liveHands.pop();
             if (removed.isDealer && dealerWinCount > 0) dealerWinCount--;
-            if (isDealer) {
-                document.getElementById('liveDealerStatusText').innerText = dealerWinCount <= 1 ? '莊家' : `莊連${dealerWinCount - 1}`;
-            }
             saveLiveStateToStorage();
             updateLiveHandUI();
         };
@@ -802,6 +946,8 @@
             liveHands = [];
             dealerWinCount = 0;
             isDealer = false;
+            selectedPatterns = [];
+            document.querySelectorAll('.pattern-chip').forEach(btn => btn.classList.remove('active'));
             const btn = document.getElementById('btnDealerToggle');
             if (btn) {
                 btn.className = 'px-3 py-1 rounded-lg font-bold border bg-gray-800 text-gray-400 border-gray-700';
@@ -809,6 +955,7 @@
             }
             const statusText = document.getElementById('liveDealerStatusText');
             if (statusText) statusText.innerText = '閒家';
+            recalculateAutoTai();
             saveLiveStateToStorage();
             updateLiveHandUI();
         };
@@ -845,20 +992,26 @@
                     gun++;
                     badge = `<span class="bg-red-950 text-smlRed border border-smlRed/40 px-1 py-0.5 rounded text-[10px] font-bold whitespace-nowrap">放槍</span>`;
                     scoreText = `<span class="text-smlRed font-bold whitespace-nowrap">-$${Math.abs(h.score)} (${h.pts}P)</span>`;
+                } else if (h.type === 'draw') {
+                    badge = `<span class="bg-cyan-950 text-smlCyan border border-smlCyan/40 px-1 py-0.5 rounded text-[10px] whitespace-nowrap">流局(連莊)</span>`;
+                    scoreText = `<span class="text-gray-400 whitespace-nowrap">$0</span>`;
                 } else {
-                    badge = `<span class="bg-gray-800 text-gray-400 px-1 py-0.5 rounded text-[10px] whitespace-nowrap">流局</span>`;
+                    badge = `<span class="bg-gray-800 text-gray-400 px-1 py-0.5 rounded text-[10px] whitespace-nowrap">過手</span>`;
                     scoreText = `<span class="text-gray-400 whitespace-nowrap">$0</span>`;
                 }
                 if (h.dealerStreakCount > maxStreak) maxStreak = h.dealerStreakCount;
                 totalMoney += h.score;
                 totalPts += (h.pts || 0);
+
                 const dealerBadge = h.dealerTitle ? `<span class="bg-amber-950 text-amber-400 border border-amber-800/60 px-1 py-0.5 rounded text-[9px] font-bold whitespace-nowrap">[${h.dealerTitle}]</span>` : '';
                 const tileBadge = h.winTile ? `<span class="bg-gray-800 text-smlCyan px-1 py-0.5 rounded text-[9px] whitespace-nowrap">胡:${h.winTile}</span>` : (h.gunTile ? `<span class="bg-gray-800 text-smlRed px-1 py-0.5 rounded text-[9px] whitespace-nowrap">槍:${h.gunTile}</span>` : '');
+                const patternsText = (h.patterns && h.patterns.length > 0) ? `<span class="text-gray-400 text-[9px]">(${h.patterns.join(',')})</span>` : '';
+                
                 html += `
                     <div class="flex items-center justify-between bg-gray-900/90 p-1.5 rounded-lg border border-gray-800 text-xs">
                         <div class="flex items-center space-x-1 flex-wrap gap-y-0.5">
                             <span class="font-mono text-gray-500 text-[10px]">#${idx + 1}</span>
-                            ${dealerBadge} ${badge} ${tileBadge}
+                            ${dealerBadge} ${badge} ${tileBadge} ${patternsText}
                         </div>
                         <div class="flex items-center space-x-2">
                             ${scoreText}
@@ -1008,25 +1161,32 @@
                     const badge = h.type === 'zimo' ? '<span class="text-smlGreen font-bold">自摸</span>' :
                                   h.type === 'hu' ? '<span class="text-smlCyan font-bold">胡牌</span>' :
                                   h.type === 'beZimo' ? '<span class="text-smlAmber font-bold">被自摸</span>' :
-                                  h.type === 'gun' ? '<span class="text-smlRed font-bold">放槍</span>' : '<span class="text-gray-400">流局</span>';
+                                  h.type === 'gun' ? '<span class="text-smlRed font-bold">放槍</span>' : 
+                                  h.type === 'draw' ? '<span class="text-smlCyan">流局</span>' : '<span class="text-gray-400">過手</span>';
                     const winTile = h.winTile ? `<span class="bg-gray-800 text-smlCyan px-1 py-0.5 rounded text-[9px] border border-gray-700">胡:${h.winTile}</span>` : '';
                     const gunTile = h.gunTile ? `<span class="bg-gray-800 text-smlRed px-1 py-0.5 rounded text-[9px] border border-gray-700">槍:${h.gunTile}</span>` : '';
+                    const patternText = (h.patterns && h.patterns.length > 0) ? `<div class="text-[10px] text-gray-400 font-mono pl-5">牌型: ${h.patterns.join(', ')} (${h.tai || 0}台)</div>` : '';
+                    
                     handsHtml += `
-                        <div class="flex items-center justify-between p-2 bg-gray-900 rounded-lg border border-gray-800 text-xs">
-                            <div class="flex items-center space-x-1 flex-wrap gap-y-0.5">
-                                <span class="text-gray-500 font-mono text-[10px]">#${idx + 1}</span>
-                                ${badge} ${winTile} ${gunTile}
+                        <div class="p-2 bg-gray-900 rounded-lg border border-gray-800 space-y-1">
+                            <div class="flex items-center justify-between text-xs">
+                                <div class="flex items-center space-x-1 flex-wrap gap-y-0.5">
+                                    <span class="text-gray-500 font-mono text-[10px]">#${idx + 1}</span>
+                                    ${badge} ${winTile} ${gunTile}
+                                </div>
+                                <div class="font-bold font-mono ${h.score >= 0 ? 'text-smlGreen' : 'text-smlRed'}">
+                                    ${h.score >= 0 ? '+$' + h.score : '-$' + Math.abs(h.score)} (${h.pts || 0}P)
+                                </div>
                             </div>
-                            <div class="font-bold font-mono ${h.score >= 0 ? 'text-smlGreen' : 'text-smlRed'}">
-                                ${h.score >= 0 ? '+$' + h.score : '-$' + Math.abs(h.score)} (${h.pts || 0}P)
-                            </div>
+                            ${patternText}
                         </div>
                     `;
                 });
             } else {
                 handsHtml = `<div class="text-center py-4 text-gray-500 text-xs">這局無單把詳細紀錄</div>`;
             }
-            document.getElementById('modalBody').innerHTML = `
+
+            document.getElementById('modalTabContent-hands').innerHTML = `
                 <div class="grid grid-cols-3 gap-1.5 bg-gray-900 p-2.5 rounded-xl border border-gray-800 text-center">
                     <div><span class="text-gray-400 text-[9px]">順位</span><div class="text-xs font-bold text-white">${r.rank} 位</div></div>
                     <div><span class="text-gray-400 text-[9px]">總金額</span><div class="text-xs font-bold ${r.money >= 0 ? 'text-smlGreen' : 'text-smlRed'}">${r.money >= 0 ? '+$'+r.money : '-$'+Math.abs(r.money)}</div></div>
@@ -1040,8 +1200,106 @@
                     <div class="space-y-1.5 max-h-52 overflow-y-auto pr-1">${handsHtml}</div>
                 </div>
             `;
+
+            renderModalAnalysisTab(r);
+            window.switchModalTab('hands');
             document.getElementById('detailModal').classList.remove('hidden');
         };
+
+        window.switchModalTab = function(tabName) {
+            const btnHands = document.getElementById('modalTabBtn-hands');
+            const btnAnalysis = document.getElementById('modalTabBtn-analysis');
+            const contentHands = document.getElementById('modalTabContent-hands');
+            const contentAnalysis = document.getElementById('modalTabContent-analysis');
+
+            if (tabName === 'hands') {
+                btnHands.className = "flex-1 py-1.5 rounded-lg text-center text-smlGreen bg-gray-800 border border-smlGreen/30";
+                btnAnalysis.className = "flex-1 py-1.5 rounded-lg text-center text-gray-400 border border-transparent";
+                contentHands.classList.remove('hidden');
+                contentAnalysis.classList.add('hidden');
+            } else {
+                btnAnalysis.className = "flex-1 py-1.5 rounded-lg text-center text-smlGreen bg-gray-800 border border-smlGreen/30";
+                btnHands.className = "flex-1 py-1.5 rounded-lg text-center text-gray-400 border border-transparent";
+                contentAnalysis.classList.remove('hidden');
+                contentHands.classList.add('hidden');
+            }
+        };
+
+        function renderModalAnalysisTab(r) {
+            const totalHuZimoGame = (r.hu || 0) + (r.zimo || 0);
+            const totalLossGame = (r.gun || 0) + (r.beZimo || 0);
+            document.getElementById('mStatGameWinLoss').innerText = `${totalHuZimoGame} / ${totalLossGame}`;
+
+            let gameWinPtsSum = 0;
+            if (r.handsList && r.handsList.length > 0) {
+                r.handsList.forEach(h => {
+                    if (h.type === 'hu' || h.type === 'zimo') gameWinPtsSum += (h.pts || 0);
+                });
+            } else if (r.points > 0) gameWinPtsSum = r.points;
+            
+            const gameAvgPts = totalHuZimoGame > 0 ? (gameWinPtsSum / totalHuZimoGame).toFixed(1) : 0;
+            document.getElementById('mStatGameAvgPts').innerText = `${gameAvgPts}P`;
+            document.getElementById('mStatGameScore').innerText = `${r.points}P / $${r.money}`;
+
+            const totalCareerGames = records.length || 1;
+            const careerTotalWinCount = records.reduce((acc, rec) => acc + (rec.hu || 0) + (rec.zimo || 0), 0);
+            const careerTotalLossCount = records.reduce((acc, rec) => acc + (rec.gun || 0) + (rec.beZimo || 0), 0);
+            const careerAvgWinCount = (careerTotalWinCount / totalCareerGames).toFixed(1);
+            const careerAvgLossCount = (careerTotalLossCount / totalCareerGames).toFixed(1);
+            
+            let careerWinPtsSum = 0;
+            records.forEach(rec => {
+                if (rec.handsList && rec.handsList.length > 0) {
+                    rec.handsList.forEach(h => {
+                        if (h.type === 'hu' || h.type === 'zimo') careerWinPtsSum += (h.pts || 0);
+                    });
+                } else if (rec.points > 0) careerWinPtsSum += rec.points;
+            });
+            const careerAvgPts = careerTotalWinCount > 0 ? (careerWinPtsSum / careerTotalWinCount).toFixed(1) : 0;
+            const careerAvgScore = (records.reduce((acc, rec) => acc + rec.points, 0) / totalCareerGames).toFixed(1);
+
+            document.getElementById('mStatCareerWinLoss').innerText = `生涯: ${careerAvgWinCount} / ${careerAvgLossCount}`;
+            document.getElementById('mStatCareerAvgPts').innerText = `生涯: ${careerAvgPts}P`;
+            document.getElementById('mStatCareerAvgScore').innerText = `生涯均局: ${careerAvgScore}P`;
+
+            let labels = [], moneyData = [], pointsData = [];
+            let cumMoney = 0, cumPts = 0;
+            if (r.handsList && r.handsList.length > 0) {
+                r.handsList.forEach((h, idx) => {
+                    labels.push(`#${idx + 1}`);
+                    cumMoney += (h.score || 0);
+                    cumPts += (h.pts || 0);
+                    moneyData.push(cumMoney);
+                    pointsData.push(cumPts);
+                });
+            } else {
+                labels = ['結算'];
+                moneyData = [r.money];
+                pointsData = [r.points];
+            }
+
+            const ctxM = document.getElementById('modalMoneyChart').getContext('2d');
+            if (modalMoneyChartInstance) modalMoneyChartInstance.destroy();
+            modalMoneyChartInstance = new Chart(ctxM, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{ label: '本局金額走勢', data: moneyData, borderColor: '#00ff88', backgroundColor: 'rgba(0, 255, 136, 0.1)', fill: true, tension: 0.2 }]
+                },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+            });
+
+            const ctxP = document.getElementById('modalPointsChart').getContext('2d');
+            if (modalPointsChartInstance) modalPointsChartInstance.destroy();
+            modalPointsChartInstance = new Chart(ctxP, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{ label: '本局點數走勢', data: pointsData, borderColor: '#00e5ff', backgroundColor: 'rgba(0, 229, 255, 0.1)', fill: true, tension: 0.2 }]
+                },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+            });
+        }
 
         window.closeModal = function() {
             currentModalRecordId = null;
@@ -1094,7 +1352,7 @@
                 document.getElementById('statTotalGames').innerText = 0;
                 document.getElementById('statAvgRank').innerText = '0.00';
                 document.getElementById('statMaxStreak').innerText = 0;
-                document.getElementById('statAvgStreak').innerText = '0.00';
+                document.getElementById('statLuckValue').innerText = 100;
                 document.getElementById('statCareerHu').innerText = 0;
                 document.getElementById('statCareerZimo').innerText = 0;
                 document.getElementById('statCareerBeZimo').innerText = 0;
@@ -1121,12 +1379,14 @@
             
             const streaks = records.map(r => r.streak || 0);
             const maxStreak = Math.max(...streaks, 0);
-            const avgStreak = (streaks.reduce((acc, val) => acc + val, 0) / totalGames).toFixed(2);
             
             const totalHu = records.reduce((acc, r) => acc + (r.hu || 0), 0);
             const totalZimo = records.reduce((acc, r) => acc + (r.zimo || 0), 0);
             const totalBeZimo = records.reduce((acc, r) => acc + (r.beZimo || 0), 0);
             const totalGun = records.reduce((acc, r) => acc + (r.gun || 0), 0);
+
+            const luckValue = Math.max(0, 100 + (totalZimo * 15) - (totalBeZimo * 15) + (totalHu * 5) - (totalGun * 5));
+
             const winCountTotal = totalHu + totalZimo;
             const huRate = totalHands > 0 ? ((totalHu / totalHands) * 100).toFixed(1) : 0;
             const zimoRate = totalHands > 0 ? ((totalZimo / totalHands) * 100).toFixed(1) : 0;
@@ -1137,14 +1397,11 @@
             records.forEach(r => {
                 if (r.handsList && r.handsList.length > 0) {
                     r.handsList.forEach(h => {
-                        if (h.type === 'hu' || h.type === 'zimo') {
-                            totalWinPointsSum += (h.pts || 0);
-                        }
+                        if (h.type === 'hu' || h.type === 'zimo') totalWinPointsSum += (h.pts || 0);
                     });
-                } else {
-                    if (r.points > 0) totalWinPointsSum += r.points;
-                }
+                } else if (r.points > 0) totalWinPointsSum += r.points;
             });
+
             const avgWinPts = winCountTotal > 0 ? (totalWinPointsSum / winCountTotal).toFixed(1) : 0;
             const maxWinPts = Math.max(...records.map(r => r.maxWinPts || 0), 0);
             
@@ -1155,7 +1412,7 @@
             document.getElementById('statTotalGames').innerText = totalGames;
             document.getElementById('statAvgRank').innerText = avgRank;
             document.getElementById('statMaxStreak').innerText = maxStreak;
-            document.getElementById('statAvgStreak').innerText = avgStreak;
+            document.getElementById('statLuckValue').innerText = luckValue;
             document.getElementById('statCareerHu').innerText = totalHu;
             document.getElementById('statCareerZimo').innerText = totalZimo;
             document.getElementById('statCareerBeZimo').innerText = totalBeZimo;
@@ -1192,7 +1449,6 @@
             const scoreStability = Math.max(0, Math.min(100, Math.round((4 - avgRank) / 3 * 100)));
             const scoreExplosiveness = Math.min(100, Math.round((maxWinPts / 30) * 50 + (maxStreak / 5) * 50));
             const scoreTechnique = Math.round((scoreOffense * 0.3 + scoreDefense * 0.4 + scoreStability * 0.3));
-
             renderRadarChart([scoreEfficiency, scoreOffense, scoreDefense, scoreTechnique, scoreExplosiveness, scoreStability]);
         }
 
@@ -1279,4 +1535,5 @@
     </script>
 </body>
 </html>
+
 
